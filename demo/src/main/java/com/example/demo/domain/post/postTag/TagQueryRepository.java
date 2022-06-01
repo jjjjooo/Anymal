@@ -19,7 +19,7 @@ public class TagQueryRepository extends QuerydslRepositorySupport {
         super(Posts.class);
         this.queryFactory = queryFactory;
     }
-    public List<Posts> findTags(String tag) {
+    public List<Posts> findTags(String tag,int page) {
         return queryFactory
                 .selectFrom(posts)
                 .innerJoin(postsTag)
@@ -28,6 +28,9 @@ public class TagQueryRepository extends QuerydslRepositorySupport {
                     .on(tag1.id.eq(postsTag.tag.id))
                 .where(eqName(tag))
                 .distinct()
+                .offset((page-1) * 16)
+                .limit(16)
+                .orderBy(posts.id.desc())
                 .fetch();
 
     }

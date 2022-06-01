@@ -8,6 +8,8 @@ import com.example.demo.domain.post.posts.Posts;
 import com.example.demo.domain.tag.Tag;
 import com.example.demo.domain.tag.TagRepository;
 import com.example.demo.dto.PostsResponseDto;
+import com.example.demo.exception.post.PostException;
+import com.example.demo.exception.post.PostExceptionType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,12 +26,14 @@ public class PostsTagService {
     private final PostsTagRepository postsTagRepository;
     private final TagQueryRepository tagQueryRepository;
     @Transactional
-    public List<PostsResponseDto> findByTag(String tag, Long id){
+    public List<PostsResponseDto> findByTag(String tag, int page){
 
         List<Tag> tags = tagRepository.findByTagContaining(tag).orElseThrow(
                 ()-> new IllegalArgumentException("관련 검색태그가 없습니다."));
 
-        List<Posts> posts = tagQueryRepository.findTags(tag);
+        List<Posts> posts = tagQueryRepository.findTags(tag, page);
+
+        if(posts.isEmpty()){throw new PostException(PostExceptionType.POST_NOT_POUND);}
 
         List<PostsResponseDto> tagPost = posts.stream().map(
                 post->new PostsResponseDto(post,false)).collect(Collectors.toList());

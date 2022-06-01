@@ -109,7 +109,6 @@ public class PostsService {
             throw new MemberException(MemberExceptionType.NOT_ALLOW);
         }
     }
-    //username 페이징 -> LAZY 로딩으로 변경
     @Transactional
     public Result paging(int page, String dType, String area) {
 
@@ -124,7 +123,6 @@ public class PostsService {
         int totalDataSize = queryRepository.getPages(dType,area);
 
         int totalPage = totalDataSize/16;
-        System.out.println("totalPage = " + totalPage);
         if(totalDataSize < 16){totalPage=1;}
         else if(totalDataSize%16 !=0){totalPage+=1;}
         return new Result(list, totalPage);

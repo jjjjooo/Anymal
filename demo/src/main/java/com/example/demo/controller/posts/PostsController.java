@@ -131,9 +131,9 @@ public class PostsController {
      */
     @GetMapping("/tag")
     public ResponseEntity<List<PostsResponseDto>> findByTag(@RequestParam(required = true)String tag,
-                                                            @RequestParam(required = false)Long tagId){
+                                                            @RequestParam(required = true)int page){
 
-        return new ResponseEntity<>(postsTagService.findByTag(tag, tagId), HttpStatus.OK);
+        return new ResponseEntity<>(postsTagService.findByTag(tag, page), HttpStatus.OK);
     }
 
 

@@ -15,6 +15,7 @@ public class Address {
     private String sido;
     private String sigungu;
     private String bname;
+    private String bname2;
 
     public Address(List<String> address){
         if(!address.isEmpty()) {
