@@ -50,6 +50,10 @@
                   clearable
                   :error-messages="errors"
                   prepend-icon="mdi-lock-outline"
+                  @click:append="show = !show"
+                  :append-icon="
+                    show ? 'mdi-eye' : 'mdi-eye-off'
+                  "
                 ></v-text-field>
               </ValidationProvider>
 
@@ -90,6 +94,7 @@ export default {
       password: '',
       logMessage: '',
       address: [],
+      show: false,
     };
   },
 
