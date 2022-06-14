@@ -1,9 +1,11 @@
 function saveAuthToCookie(value) {
-  document.cookie = `til_auth=${value}`;
+  //document.cookie = `til_auth=${value}`;
+  localStorage.setItem('ACCESS_TOKEN', value);
 }
 
 function saveUserToCookie(value) {
-  document.cookie = `til_user=${value}`;
+  //document.cookie = `til_user=${value}`;
+  localStorage.setItem('NAME', value);
 }
 
 function getAuthFromCookie() {

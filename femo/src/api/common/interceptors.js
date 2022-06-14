@@ -1,8 +1,12 @@
-import store from '@/store/memberStore';
+//import store from '@/store/memberStore';
 export function setIntercepotors(instance) {
   instance.interceptors.request.use(
     function (config) {
-      config.headers.Authorization = `Bearer ${store.state.token}`;
+      const accessToken =
+        localStorage.getItem('ACCESS_TOKEN');
+      //config.headers.Authorization = `Bearer ${store.state.token}`;
+      config.headers.Authorization =
+        'Bearer ' + accessToken;
       return config;
     },
     function (error) {

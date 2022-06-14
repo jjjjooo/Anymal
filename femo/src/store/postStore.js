@@ -132,7 +132,6 @@ const postStore = {
     async REQUEST_GET_TAG_POST(context, paylod) {
       const { data } = await requestGetTagPosts(paylod);
       console.log(data);
-
       context.commit('SET_TAG_SEARCH', data);
     },
     async REQUEST_GET_MY_GOOD_POST(context, payload) {

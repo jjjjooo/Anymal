@@ -169,8 +169,10 @@ export default {
     },
     logOut() {
       this.$store.commit('clearMember');
-      deleteCookie('til_auth');
-      deleteCookie('til_user');
+      // deleteCookie('til_auth');
+      // deleteCookie('til_user');
+      localStorage.removeItem('NAME');
+      localStorage.removeItem('ACCESS_TOKEN');
       this.$router.push('/home');
     },
   },

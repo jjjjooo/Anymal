@@ -28,16 +28,16 @@ public class PostsTagService {
     @Transactional
     public List<PostsResponseDto> findByTag(String tag, int page){
 
-        List<Tag> tags = tagRepository.findByTagContaining(tag).orElseThrow(
-                ()-> new IllegalArgumentException("관련 검색태그가 없습니다."));
+       tagRepository.findByTagContaining(tag).orElseThrow(
+                ()-> new PostException(PostExceptionType.TAG_NOT_FOUND));
 
         List<Posts> posts = tagQueryRepository.findTags(tag, page);
 
         if(posts.isEmpty()){throw new PostException(PostExceptionType.POST_NOT_POUND);}
 
-        List<PostsResponseDto> tagPost = posts.stream().map(
+        return posts.stream().map(
                 post->new PostsResponseDto(post,false)).collect(Collectors.toList());
-        return tagPost;
+
 
     }
     @Transactional

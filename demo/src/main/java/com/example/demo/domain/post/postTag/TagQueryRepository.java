@@ -32,7 +32,6 @@ public class TagQueryRepository extends QuerydslRepositorySupport {
                 .limit(16)
                 .orderBy(posts.id.desc())
                 .fetch();
-
     }
     private BooleanExpression eqName(String tag) {
         return tag != null ? tag1.tag.contains(tag) : null ;
