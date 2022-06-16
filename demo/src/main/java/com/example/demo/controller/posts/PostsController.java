@@ -135,7 +135,4 @@ public class PostsController {
 
         return new ResponseEntity<>(postsTagService.findByTag(tag, page), HttpStatus.OK);
     }
-
-
-
 }

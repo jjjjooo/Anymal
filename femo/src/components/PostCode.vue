@@ -1,37 +1,4 @@
 <template>
-  <!-- <v-container>
-    <v-row> -->
-  <!-- <v-text-field
-        text
-        label="주소"
-        v-model="address"
-        prepend-icon="mdi-home-outline"
-        disabled
-        class="mr-4"
-      ></v-text-field>
-      <v-btn
-        class="mt-2"
-        color="red lighten-2"
-        dark
-        :disabled="!updateFlag"
-        @click="DaumPost()"
-        >주소 찾기</v-btn
-      > -->
-
-  <!-- <v-dialog v-model="postOpen" width="500">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            color="red lighten-2"
-            dark
-            v-bind="attrs"
-            v-on="on"
-          >
-            주소 찾기
-          </v-btn>
-        </template>
-
-        <VueDaumPostcode @complete="oncomplete" />
-      </v-dialog> -->
   <section class="test">
     <div>
       <v-text-field
@@ -60,21 +27,21 @@ export default {
     updateFlag: {
       type: Boolean,
     },
+    rAddress: {
+      type: String,
+    },
   },
+
   components: {
     VueDaumPostcode,
   },
   data() {
     return {
-      address: '',
+      address: this.rAddress,
       postOpen: false,
     };
   },
-  computed: {
-    postDetail() {
-      return this.$store.state.postStore.postDetail;
-    },
-  },
+
   methods: {
     search: function () {
       this.postOpen = true;
@@ -90,14 +57,6 @@ export default {
       this.postOpen = false;
       this.$emit('address', result);
     },
-  },
-  created() {
-    this.address =
-      this.postDetail.address.sido +
-      ' ' +
-      this.postDetail.address.sigungu +
-      ' ' +
-      this.postDetail.address.bname;
   },
 };
 </script>

@@ -23,6 +23,7 @@ const postStore = {
     postGood: false,
     myPostTotalPage: 1,
     myPostCurrentPage: 1,
+    address: '',
   },
   getters: {
     good(state) {
@@ -63,6 +64,14 @@ const postStore = {
     SET_TAG_SEARCH(state, payload) {
       state.tagList = payload;
     },
+    SET_POST_ADDRESS(state, payload) {
+      state.address =
+        payload.sido +
+        ' ' +
+        payload.sigungu +
+        ' ' +
+        payload.bname;
+    },
   },
 
   actions: {
@@ -77,6 +86,7 @@ const postStore = {
       console.log(data);
       commit('SET_POST_GOOD', data.good);
       commit('SET_POST_DETAIL', data);
+      commit('SET_POST_ADDRESS', data.address);
     },
 
     async REQUEST_GET_ALL_POST_PAGE({ commit }, payload) {

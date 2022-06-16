@@ -48,6 +48,7 @@
                   v-model="password"
                   label="비밀번호"
                   clearable
+                  :type="show ? 'text' : 'password'"
                   :error-messages="errors"
                   prepend-icon="mdi-lock-outline"
                   @click:append="show = !show"

@@ -10,7 +10,8 @@ function createInstance() {
 //회원
 function createInstanceWithAuth(url) {
   const instance = axios.create({
-    baseURL: `${process.env.VUE_APP_API_URL}${url}`,
+    //baseURL: `${process.env.VUE_APP_API_URL}${url}`,
+    baseURL: `http://localhost:9000/${url}`,
   });
   return setIntercepotors(instance);
 }

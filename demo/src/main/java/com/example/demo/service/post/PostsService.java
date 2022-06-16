@@ -2,7 +2,6 @@ package com.example.demo.service.post;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import com.example.demo.domain.chat.ChatRoomRepository;
 import com.example.demo.domain.post.postGood.Good;

@@ -13,8 +13,8 @@
       </div>
 
       <div class="ml-5">
-        <p>상대방 : {{ chatRoomDetail.postSeller }}</p>
-        <p>게시글 제목 : {{ chatRoomDetail.title }}</p>
+        <p>상대방 : {{ chatRoomDetail.postAuth }}</p>
+        <p>게시글 제목 : {{ chatRoomDetail.postTitle }}</p>
       </div>
 
       <div style="clear: both"></div>

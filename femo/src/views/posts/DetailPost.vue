@@ -81,15 +81,16 @@
             color="pink"
             icon
             small
+            :disabled="checkAuthority()"
             @click="pushGood(postDetail.id)"
           >
             <v-icon :disabled="!postGood">mdi-heart</v-icon>
           </v-btn>
           <v-btn
             class="float-right"
-            dark
             small
             rounded
+            :disabled="checkAuthority()"
             @click="chat"
           >
             <v-icon right> mdi-chat </v-icon>
@@ -107,10 +108,22 @@
           ></v-select>
         </v-col>
         <v-col cols="8">
-          <post-code
-            :updateFlag="updateFlag"
-            @address="addrSelected"
-          />
+          <div v-if="updateFlag">
+            <post-code
+              :updateFlag="updateFlag"
+              :rAddress="postAddress"
+              @address="addrSelected"
+            />
+          </div>
+          <div v-else>
+            <v-text-field
+              text
+              label="주소"
+              v-model="rAddress"
+              prepend-icon="mdi-email-outline"
+              :disabled="!updateFlag"
+            />
+          </div>
         </v-col>
       </v-row>
       <v-spacer />
@@ -201,6 +214,7 @@
 </template>
 
 <script>
+//import { mount } from '@vue/test-utils';
 export default {
   name: 'postDetail',
   components: {
@@ -213,6 +227,7 @@ export default {
       images: [],
       chips: [],
       rChips: [],
+      rAddress: '',
       updateDetail: {
         title: '',
         feature: '',
@@ -232,6 +247,7 @@ export default {
       });
     },
     addrSelected(data) {
+      console.log(data);
       this.updateDetail.address = data;
     },
     remove(item) {
@@ -274,13 +290,11 @@ export default {
       }
     },
     checkAuthority() {
-      if (this.name !== this.postDetail.name) {
-        this.$store.commit('SET_SNACK_BAR', {
-          msg: '작성자만 수정/삭제가 가능합니다.',
-          color: 'error',
-        });
+      if (this.username !== this.postDetail.username) {
+        console.log('틀림');
         return false;
       }
+      console.log('맞음');
       return true;
     },
 
@@ -332,12 +346,16 @@ export default {
     postList() {
       return this.$store.state.postStore.postList;
     },
+    postAddress() {
+      return this.$store.state.postStore.address;
+    },
   },
   created() {
-    this.$store.dispatch(
-      'REQUEST_GET_POST',
-      this.$route.params.id,
-    );
+    this.$store
+      .dispatch('REQUEST_GET_POST', this.$route.params.id)
+      .then(() => {
+        this.rAddress = this.$store.state.postStore.address;
+      });
   },
 };
 </script>

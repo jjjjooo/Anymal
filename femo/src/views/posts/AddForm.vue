@@ -55,7 +55,10 @@
             </v-col>
 
             <v-col cols="8">
-              <post-code />
+              <post-code
+                :updateFlag="updateFlag"
+                @address="addrSelected"
+              />
             </v-col>
           </v-row>
           <v-row>
@@ -161,6 +164,7 @@ export default {
     neutering: '',
     gender: '',
     address: '',
+    updateFlag: true,
   }),
   computed: {
     userarea() {
@@ -168,6 +172,9 @@ export default {
     },
   },
   methods: {
+    addrSelected(data) {
+      this.address = data;
+    },
     remove(item) {
       this.chips.splice(this.chips.indexOf(item), 1);
       this.chips = [...this.chips];
@@ -187,6 +194,7 @@ export default {
         tags: this.tags,
         gender: this.gender,
         neutering: this.neutering,
+        address: this.address,
       };
       postData.append(
         'key',
