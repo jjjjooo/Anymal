@@ -329,7 +329,7 @@ public Page<Post> findAllByTagName(String tagName, Pageable pageable) {
 
 </br>
 
-## 6. 그 외 트러블 슈팅
+## 6. 문제 해결
 <details>
 <summary>npm run dev 실행 오류</summary>
 <div markdown="1">
@@ -351,74 +351,39 @@ public Page<Post> findAllByTagName(String tagName, Pageable pageable) {
 </details>
 
 <details>
-<summary>ElementUI input 박스에서 `v-on:keyup.enter="메소드명"`이 정상 작동 안하는 문제</summary>
+<summary>querydsl Q클래스 생성 문제</summary>
 <div markdown="1">
   
-  - `v-on:keyup.enter.native=""` 와 같이 .native 추가로 해결
+  - `def querydslDir = "$buildDir/generated/querydsl"`
   
+  - `implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    implementation "com.querydsl:querydsl-apt:${queryDslVersion}"`
+  
+  - 임의 경로가 아닌 명시된 경로로 설정과 버전을 명시하지 않으므로 해결
 </div>
 </details>
 
-<details>
-<summary> Post 목록 출력시에 Member 객체 출력 에러 </summary>
-<div markdown="1">
-  
-  - 에러 메세지(500에러)
-    - No serializer found for class org.hibernate.proxy.pojo.javassist.JavassistLazyInitializer and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationConfig.SerializationFeature.FAIL_ON_EMPTY_BEANS)
-  - 해결
-    - Post 엔티티에 @ManyToOne 연관관계 매핑을 LAZY 옵션에서 기본(EAGER)옵션으로 수정
-  
-</div>
-</details>
-    
-<details>
-<summary> 프로젝트를 git init으로 생성 후 발생하는 npm run dev/build 오류 문제 </summary>
-<div markdown="1">
-  
-  ```jsx
-    $ npm run dev
-    npm ERR! path C:\Users\integer\IdeaProjects\pilot\package.json
-    npm ERR! code ENOENT
-    npm ERR! errno -4058
-    npm ERR! syscall open
-    npm ERR! enoent ENOENT: no such file or directory, open 'C:\Users\integer\IdeaProjects\pilot\package.json'
-    npm ERR! enoent This is related to npm not being able to find a file.
-    npm ERR! enoent
-
-    npm ERR! A complete log of this run can be found in:
-    npm ERR!     C:\Users\integer\AppData\Roaming\npm-cache\_logs\2019-02-25T01_23_19_131Z-debug.log
-  ```
-  
-  - 단순히 npm run dev/build 명령을 입력한 경로가 문제였다.
-   
-</div>
-</details>    
 
 
 <details>
 <summary> JSON: Infinite recursion (StackOverflowError)</summary>
 <div markdown="1">
   
-  - @JsonIgnoreProperties 사용으로 해결
+  - @JsonIgnore 사용으로 해결
     - 참고
         - [http://springquay.blogspot.com/2016/01/new-approach-to-solve-json-recursive.html](http://springquay.blogspot.com/2016/01/new-approach-to-solve-json-recursive.html)
         - [https://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue](https://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue)
+  
+  - 그 외 순환참조를 해결하는 방법에서 불필요한 양방향 관계보다 단방향 관계 설정이 좋다.
+   - 하지만 단방향 관계에서 불필요한 쿼리문이 날라가는 단점은?
+  
+  - 엔티티를 직접적으로 반환하지말고 DTO를 이용해 간접 반환한다.
         
 </div>
 </details>  
     
     
-<details>
-<summary> 컨텐츠수정 모달창에서 태그 셀렉트박스 드랍다운이 뒤쪽에 보이는 문제</summary>
-<div markdown="1">
-  
-   - ElementUI의 Global Config에 옵션 추가하면 해결
-     - main.js 파일에 `Vue.us(ElementUI, { zIndex: 9999 });` 옵션 추가(9999 이하면 안됌)
-   - 참고
-     - [https://element.eleme.io/#/en-US/component/quickstart#global-config](https://element.eleme.io/#/en-US/component/quickstart#global-config)
-        
-</div>
-</details> 
+
 
 <details>
 <summary> HTTP delete Request시 개발자도구의 XHR(XMLHttpRequest )에서 delete요청이 2번씩 찍히는 이유</summary>
@@ -436,33 +401,13 @@ public Page<Post> findAllByTagName(String tagName, Pageable pageable) {
         
 </div>
 </details> 
-
-<details>
-<summary> 이미지 파싱 시 og:image 경로가 달라서 제대로 파싱이 안되는 경우</summary>
-<div markdown="1">
-  
-  - UserAgent 설정으로 해결
-        - [https://www.javacodeexamples.com/jsoup-set-user-agent-example/760](https://www.javacodeexamples.com/jsoup-set-user-agent-example/760)
-        - [http://www.useragentstring.com/](http://www.useragentstring.com/)
-        
-</div>
-</details> 
     
 <details>
 <summary>화면단에서 새로고침 시 VEUX 상태 초기화 되는 문제</summary>
 <div markdown="1">
- 
-        
-</div>
-</details> 
-    
-<details>
-<summary>JPA 양방향 엔티티 무한재귀 문제</summary>
-<div markdown="1">
   
-  - @JsonIgnore 직렬화 방지
-  - Entity 자체 반환보다는 DTO를 이용
-  - 양방향 -> 단방향으로 변경
+  - vuex-persistedstate를 이용하여 vuex에 저장되어 있는 값들을 localStorage에 저장하여 해결  
+  - 하지만 props로 전달 받은 데이터는 저장이 안되며, 전역화 시킨 컴포넌트를 해제하여  각각의 view 에 삽입으로 해결
         
 </div>
 </details> 
