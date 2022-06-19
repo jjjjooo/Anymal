@@ -362,7 +362,7 @@ public List<Posts> findTags(String tag,int page) {
 </details>
 
 <details>
-<summary>querydsl Q클래스 생성 문제</summary>
+<summary>querydslQueryDSl 오류 및 Q클래스 생성 문제</summary>
 <div markdown="1">
   
   - `def querydslDir = "$buildDir/generated/querydsl"`
@@ -422,7 +422,7 @@ public List<Posts> findTags(String tag,int page) {
   
   
 <details>
-<summary>좋아요 목록 조회시</summary>
+<summary>특정 객체 삭제 시 관련된  모두 삭제</summary>
 <div markdown="1">
   
   - 양방향 설정관계에서 CASCADE_ALL(REMOVE) 옵션 설정을 상황에 맞게 변경,
