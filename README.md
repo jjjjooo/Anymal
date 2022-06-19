@@ -67,12 +67,12 @@
 
   
 <details>
-<summary><b>4.3 태그 기능 </b></summary>
+<summary><b>4.3 게시글 부가 기능 </b></summary>
 <div markdown="2">
   
 ### 4.3. 게시글 부가 기능
   
-#### 4.3.1. 태그 검색 능
+#### 4.3.1. 태그 검색 기능
   
 ~~~java
 /**
