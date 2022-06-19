@@ -232,20 +232,22 @@ public List<Posts> findTags(String tag,int page) {
 
 </br>
 
-## 5. 
+### 5. 변경 사항
 
 - 프로젝트 초기단계에서 vuetify v-lazy를 이용하여 lazy-loading을 구현했습니다.
 - 각 게시물의 필터 검색을 이용한 몇 개의 조회 기능을 구현했지만, 서버에 각 필터(비슷한 기능)별로 DB 요청하여 난잡하게 함를 호출하는 문제, 
   이것이 지연로딩의 단점과 더해 서버의 혼잡도만 늘어간다고 생각했습니다.
   
-- 유기 동물의 인기 순 조회와 같은 비인도적인 기능과 그 외 불필요하다 생각하는 조회 기능은 삭제하였습니다.
-  또한, TAG기능 통해서 조회할 수 있는 기능을 QueryDsl을 이용하여 페이징 검색이 되도록 변경했습니다.
+- 유기 동물의 인기 순위 조회와 같은 비인도적인 기능과 같은 불필요한 조회 기능은 삭제하였고
+  프로젝트 설계자가 기존 조회기능에 대해 제한적으로 변경했지만,
+  TAG 기능을 추가하여 조회가 되도록 조정했습니다.
  
 <details>
-<summary><b>이전 필터 기능 예시</b></summary>
+<summary><b>제한적 게시물 조회</b></summary>
 <div markdown="1">
 
-~~~javascript
+~~~java
+    // 인기 순, 동물 종류 조회 삭제
     categories: [
       {
         text: '보호 중',
@@ -256,22 +258,52 @@ public List<Posts> findTags(String tag,int page) {
         filter: '2',
       },
       {
-        text: '인기 순',
-        filter: '3,
-      },
-      {
         text: '주소지 주변',
-        fileter: '4',
+        fileter: '3',
       },
     ],
   }
-~~~javascript
+  watch: {
+    category: async function (category) {
+      if (category === '1') {
+        let form = {
+          page: 1,
+          dType: 'pr',
+        };
+        this.$store.dispatch(
+          'REQUEST_GET_SEARCH_POST',
+          form,
+        );
+      }
+      if (category === '2') {
+        let form = {
+          page: 1,
+          dType: 'ms',
+        };
+        this.$store.dispatch(
+          'REQUEST_GET_SEARCH_POST',
+          form,
+        );
+      }
+      if (category === '3') {
+        let form = {
+          page: 1,
+          area: this.userarea,
+        };
+        this.$store.dispatch(
+          'REQUEST_GET_SEARCH_POST',
+          form,
+        );
+      }
+    },
+  },
+~~~java
   
 </div>
 </details>
   
 <details>
-<summary><b>변경된 태그 기능 쿼리</b></summary>
+<summary><b>추가된 태그 기능 쿼리</b></summary>
 <div markdown="1"> 
 ~~~java
 /**
