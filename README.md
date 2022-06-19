@@ -244,7 +244,7 @@ public List<Posts> findTags(String tag,int page) {
  
 <details>
 <summary><b>제한적 게시물 조회</b></summary>
-<div markdown="1">
+<div markdown="5">
 
 ~~~java
     // 인기 순, 동물 종류, 제목, 조회 삭제
@@ -304,7 +304,7 @@ public List<Posts> findTags(String tag,int page) {
   
 <details>
 <summary><b>추가된 태그 기능 쿼리</b></summary>
-<div markdown="1"> 
+<div markdown="5"> 
   
 ~~~java
 /**
