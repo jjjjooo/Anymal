@@ -266,8 +266,10 @@ public List<Posts> findTags(String tag,int page) {
     ],
   }
 ~~~javascript
+  
 </div>
-</details>  
+</details>
+  
 <details>
 <summary><b>변경된 태그 기능 쿼리</b></summary>
 <div markdown="1"> 
