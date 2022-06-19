@@ -232,7 +232,7 @@ public List<Posts> findTags(String tag,int page) {
 
 </br>
 
-## 5. 문제해결
+## 5. 
 
 - 프로젝트 초기단계에서 vuetify v-lazy를 이용하여 lazy-loading을 구현했습니다.
 - 각 게시물의 필터 검색을 이용한 몇 개의 조회 기능을 구현했지만, 서버에 각 필터(비슷한 기능)별로 DB 요청하여 난잡하게 함를 호출하는 문제, 
