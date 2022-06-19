@@ -330,6 +330,7 @@ public List<Posts> findTags(String tag,int page) {
 </details>
 
 </br>
+</br>
 
 ## 6. 그  문제 해결
 <details>
