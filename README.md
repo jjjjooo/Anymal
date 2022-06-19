@@ -231,7 +231,7 @@ public List<Posts> findTags(String tag,int page) {
 
 
 </br>
-
+</br>
 ### 5. 변경 사항
 
 - 프로젝트 초기단계에서 vuetify v-lazy를 이용하여 lazy-loading을 구현했습니다.
@@ -330,9 +330,9 @@ public List<Posts> findTags(String tag,int page) {
 </details>
 
 </br>
-</br>
 
-## 6. 그  문제 해결
+
+## 6. 그 외 문제 해결
 <details>
 <summary>npm run dev 실행 오류</summary>
 <div markdown="1">
