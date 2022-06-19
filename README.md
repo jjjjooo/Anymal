@@ -60,7 +60,7 @@
 ![사용자 요청](https://user-images.githubusercontent.com/71645224/167648425-50829e9d-a7ef-4e5b-a1b5-17e820aae7ad.png)
 
 - **스토리지 활용** 
-  - 유저 정보를 로컬스토리지와 VUEX 스토리지에 저장하여 API 호출 시 헤더에 포함시켜 요청 :pushpin: [코드 확인](https://github.com/Integerous/goQuality/blob/b587bbff4dce02e3bec4f4787151a9b6fa326319/frontend/src/components/PostInput.vue#L67)
+  - 유저 정보를 로컬스토리지와 VUEX 스토리지에 저장하여 API 호출 시 헤더에 포함시켜 요청합니다. :pushpin: [코드 확인](https://github.com/Integerous/goQuality/blob/b587bbff4dce02e3bec4f4787151a9b6fa326319/frontend/src/components/PostInput.vue#L67)
   - 인증 및 인가의 여부나, 기능별로 API 요청을 분할하여 VUEX를 통해 상태관리를 용이하게 합니다.  :pushpin: [코드 확인](https://github.com/Integerous/goQuality/blob/b587bbff4dce02e3bec4f4787151a9b6fa326319/frontend/src/components/PostInput.vue#L67) 
 </div>
 </details>  
