@@ -1,6 +1,6 @@
 # :pushpin: ANYMAL
 >유기 동물 커뮤니티  
->http://ec2-3-37-84-38.ap-northeast-2.compute.amazonaws.com/ 
+>http://ec2-3-37-84-38.ap-northeast-2.compute.amazonaws.com/home 
 
 </br>
 
