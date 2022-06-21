@@ -1,6 +1,6 @@
 # :pushpin: ANYMAL
 >유기 동물 커뮤니티  
->http://ec2-3-37-84-38.ap-northeast-2.compute.amazonaws.com/ 
+
 
 </br>
 
@@ -14,7 +14,7 @@
 #### `Back-end`
   - Java 11
   - Spring Boot 2.6.3
-  - Gradle
+  - Gradle 7.4
   - Spring Data JPA
   - QueryDSL
   - MariaDB
@@ -23,7 +23,7 @@
   - STOMP
   - 
 #### `Front-end`
-  - Vue.js 2.0
+  - Vue.js 2.0 (npm node 12.14.0)
   - Vuex
   - Vuetify
 
@@ -54,25 +54,25 @@
 ![image](https://user-images.githubusercontent.com/71645224/173191697-c811a648-b982-4270-a6b3-e3f1d92049a8.png)
 
 - **토큰 인증** :pushpin: [코드 확인](https://github.com/jjjjooo/Anymal/blob/master/demo/src/main/java/com/example/demo/config/security/JwtAuthenticationFilter.java)
-  - 스프링 시큐리티에 커스텀 필터를 등록하여 토큰 인증 구현합니다.
+  - 스프링 시큐리티에 커스텀 필터를 등록하여 토큰 인증을 구현합니다.
 
 #### 4.2.2 사용자 요청
 ![사용자 요청](https://user-images.githubusercontent.com/71645224/167648425-50829e9d-a7ef-4e5b-a1b5-17e820aae7ad.png)
 
 - **스토리지 활용** 
-  - 유저 정보를 로컬스토리지와 VUEX 스토리지에 저장하여 API 호출 시 헤더에 포함시켜 요청 :pushpin: [코드 확인](https://github.com/Integerous/goQuality/blob/b587bbff4dce02e3bec4f4787151a9b6fa326319/frontend/src/components/PostInput.vue#L67)
-  - 인증 및 인가의 여부나, 기능별로 API 요청을 분할하여 VUEX를 통해 상태관리를 용이하게 합니다.  :pushpin: [코드 확인](https://github.com/Integerous/goQuality/blob/b587bbff4dce02e3bec4f4787151a9b6fa326319/frontend/src/components/PostInput.vue#L67) 
+  - 유저 정보를 로컬스토리지와 VUEX 스토리지에 저장하여 API 호출 시 헤더에 포함시켜 요청합니다. :pushpin: [코드 확인](https://github.com/Integerous/goQuality/blob/b587bbff4dce02e3bec4f4787151a9b6fa326319/frontend/src/components/PostInput.vue#L67)
+  - 인증 및 인가 여부  기능별로 API 요청을 분할하여 VUEX를 통해 상태관리를 용이하게 합니다.  :pushpin: [코드 확인](https://github.com/Integerous/goQuality/blob/b587bbff4dce02e3bec4f4787151a9b6fa326319/frontend/src/components/PostInput.vue#L67) 
 </div>
 </details>  
 
   
 <details>
-<summary><b>4.3 태그 기능 </b></summary>
+<summary><b>4.3 게시글 부가 기능 </b></summary>
 <div markdown="2">
   
 ### 4.3. 게시글 부가 기능
   
-#### 4.3.1. 태그 검색 능
+#### 4.3.1. 태그 검색 기능
   
 ~~~java
 /**
@@ -110,7 +110,7 @@ public List<Posts> findTags(String tag,int page) {
 ~~~  
 
 - **태그 검색** :pushpin: [코드 확인](https://github.com/jjjjooo/Anymal/blob/master/demo/src/main/java/com/example/demo/service/post/PostsTagService.java)
-  - 화면단에서 등록된 태그를 클릭하거나, 태그 검색창을 통해 조회를 할 경우 관련있는 문구의 게시글을 조회하도록 합니다.
+  - 화면단에서 등록된 태그를 클릭하거나, 태그 검색창을 통해 조회할 경우 관련있는 문구의 게시글을 조회하도록 합니다.
 
 #### 4.3.2. 좋아요 
 #### `좋아요 표시 여부 처리`
@@ -183,7 +183,7 @@ public List<Posts> findTags(String tag,int page) {
 ![채팅 컨트롤러](https://user-images.githubusercontent.com/71645224/168975948-8b163d52-c85e-4d14-a503-e9349d75937d.JPG)
 
 - **Publish-Subscribe 메커니즘**
-  - STOMP를 이용하여 게시글의 각 채팅방을 구분하여 해당 채티방에 메시지를 전파합니다.
+  - STOMP를 이용하여 게시글의 각 채팅방을 구분하여 해당 채티방에 메시지를 전송합니다.
   - 이때, 채팅방 생성, 입장 또는 조회 시 게시글, 받는 사람, 보내는 사람 기준으로 채팅방을 생성 및 탐색합니다.
   
 #### 4.4.3. 부가 기능
@@ -211,125 +211,126 @@ public List<Posts> findTags(String tag,int page) {
 #### 4.5.2. 커스텀 예외처리 예시
 ![커스텀 예외](https://user-images.githubusercontent.com/71645224/172182399-bd777be6-15b5-4d14-9f8e-0bcb646c3440.JPG)
   
-- **예외 정의** :pushpin: [코드 확인]()
-  - 기본적인 로그인, 회원가입, 게시글 작성과 같은 데이터 형식은 화면단에서 먼저 검증합니다.
-  - 예측가능한 예외는 커스텀 메세지를 생성하여 클라이언트 단에서 사용할 수 있도록 처리합니다.
+- **예외 정의** 
+  - 기본적인 로그인, 회원가입, 게시글 작성과 같은 데이터 형식은 화면단에서 먼저 검증합니다. :pushpin: [코드 확인](https://github.com/jjjjooo/Anymal/blob/master/femo/src/plugins/vee-validation.js)
+  - 예측가능한 예외는 커스텀 메세지를 생성하여 클라이언트 단에서 사용할 수 있도록 처리합니다. :pushpin: [코드 확인](https://github.com/jjjjooo/Anymal/blob/master/demo/src/main/java/com/example/demo/exception/post/PostExceptionType.java)
   
   
 #### 4.5.3. 일반 예외처리 예시
 ![image](https://user-images.githubusercontent.com/71645224/167844372-1e4edf3a-158e-4830-bbdc-5cbbf421f2ce.png)
   
-- **런타임 예외, 컴파일 예외** :pushpin: [코드 확인]()
+- **런타임 예외, 컴파일 예외** :pushpin: [코드 확인](https://github.com/jjjjooo/Anymal/blob/master/demo/src/main/java/com/example/demo/exception/ExceptionAdvice.java)
   - 처리불가능한 컴파일 예외는 서버 측에서 로그 형식으로 출력하며, 
   - 커스텀 예외를 제외한 런타임 예외는 마찬가지로 RestControllerAdvice를 이용하여 에러 메세지를 생성하여 처리합니다.
   
 </div>
 </details>
-  
 </div>
 </details>
 
-
 </br>
 
-## 5. 핵심 트러블 슈팅
-### 5.1. 컨텐츠 필터와 페이징 처리 문제
-- 저는 이 서비스가 페이스북이나 인스타그램 처럼 가볍게, 자주 사용되길 바라는 마음으로 개발했습니다.  
-때문에 페이징 처리도 무한 스크롤을 적용했습니다.
+## 5. 변경 사항
 
-- 하지만 [무한스크롤, 페이징 혹은 “더보기” 버튼? 어떤 걸 써야할까](https://cyberx.tistory.com/82) 라는 글을 읽고 무한 스크롤의 단점들을 알게 되었고,  
-다양한 기준(카테고리, 사용자, 등록일, 인기도)의 게시물 필터 기능을 넣어서 이를 보완하고자 했습니다.
-
-- 그런데 게시물이 필터링 된 상태에서 무한 스크롤이 동작하면,  
-필터링 된 게시물들만 DB에 요청해야 하기 때문에 아래의 **기존 코드** 처럼 각 필터별로 다른 Query를 날려야 했습니다.
-
+- 프로젝트 초기단계에서 vuetify v-lazy를 이용하여 lazy-loading을 구현했습니다.
+- 각 게시물의 필터 검색을 이용한 몇 개의 조회 기능을 구현했지만, 서버에 각 필터에 해당되는 함수 기능별로 DB 요청을 난잡하게 하는 문제,
+  이것이 지연로딩의 단점과 더해 서버의 혼잡도만 늘어간다고 생각했습니다.
+  
+- 유기 동물의 인기 순위 조회와 같은 비인도적인 기능과 불필요 조회 기능은 삭제하였고
+  프로젝트 설계자가 기존 조회기능에 대해 제한적으로 변경했지만,
+  TAG 기능을 추가하여 조회가 되도록 조정했습니다.
+ 
 <details>
-<summary><b>기존 코드</b></summary>
-<div markdown="1">
+<summary><b>제한적 게시물 조회</b></summary>
+<div markdown="5">
 
 ~~~java
+    // 인기 순, 동물 종류, 제목, 조회 삭제
+    categories: [
+      {
+        text: '보호 중',
+        filter: '1',
+      },
+      {
+        text: '찾는 중',
+        filter: '2',
+      },
+      {
+        text: '주소지 주변',
+        fileter: '3',
+      },
+    ],
+  }
+  watch: {
+    category: async function (category) {
+      if (category === '1') {
+        let form = {
+          page: 1,
+          dType: 'pr',
+        };
+        this.$store.dispatch(
+          'REQUEST_GET_SEARCH_POST',
+          form,
+        );
+      }
+      if (category === '2') {
+        let form = {
+          page: 1,
+          dType: 'ms',
+        };
+        this.$store.dispatch(
+          'REQUEST_GET_SEARCH_POST',
+          form,
+        );
+      }
+      if (category === '3') {
+        let form = {
+          page: 1,
+          area: this.userarea,
+        };
+        this.$store.dispatch(
+          'REQUEST_GET_SEARCH_POST',
+          form,
+        );
+      }
+    },
+  },
+~~~
+  
+</div>
+</details>
+  
+<details>
+<summary><b>추가된 태그 기능 쿼리</b></summary>
+<div markdown="5"> 
+  
+~~~java
 /**
- * 게시물 Top10 (기준: 댓글 수 + 좋아요 수)
- * @return 인기순 상위 10개 게시물
+ *  태그 
  */
-public Page<PostResponseDto> listTopTen() {
-
-    PageRequest pageRequest = PageRequest.of(0, 10, Sort.Direction.DESC, "rankPoint", "likeCnt");
-    return postRepository.findAll(pageRequest).map(PostResponseDto::new);
-}
-
-/**
- * 게시물 필터 (Tag Name)
- * @param tagName 게시물 박스에서 클릭한 태그 이름
- * @param pageable 페이징 처리를 위한 객체
- * @return 해당 태그가 포함된 게시물 목록
- */
-public Page<PostResponseDto> listFilteredByTagName(String tagName, Pageable pageable) {
-
-    return postRepository.findAllByTagName(tagName, pageable).map(PostResponseDto::new);
-}
-
-// ... 게시물 필터 (Member) 생략 
-
-/**
- * 게시물 필터 (Date)
- * @param createdDate 게시물 박스에서 클릭한 날짜
- * @return 해당 날짜에 등록된 게시물 목록
- */
-public List<PostResponseDto> listFilteredByDate(String createdDate) {
-
-    // 등록일 00시부터 24시까지
-    LocalDateTime start = LocalDateTime.of(LocalDate.parse(createdDate), LocalTime.MIN);
-    LocalDateTime end = LocalDateTime.of(LocalDate.parse(createdDate), LocalTime.MAX);
-
-    return postRepository
-                    .findAllByCreatedAtBetween(start, end)
-                    .stream()
-                    .map(PostResponseDto::new)
-                    .collect(Collectors.toList());
+public List<Posts> findTags(String tag,int page) {
+        return queryFactory
+                .selectFrom(posts)
+                .innerJoin(postsTag)
+                    .on(posts.id.eq(postsTag.posts.id))
+                .innerJoin(tag1)
+                    .on(tag1.id.eq(postsTag.tag.id))
+                .where(eqName(tag))
+                .distinct()
+                .offset((page-1) * 16)
+                .limit(16)
+                .orderBy(posts.id.desc())
+                .fetch();
     }
 ~~~
 
 </div>
 </details>
 
-- 이 때 카테고리(tag)로 게시물을 필터링 하는 경우,  
-각 게시물은 최대 3개까지의 카테고리(tag)를 가질 수 있어 해당 카테고리를 포함하는 모든 게시물을 질의해야 했기 때문에  
-- 아래 **개선된 코드**와 같이 QueryDSL을 사용하여 다소 복잡한 Query를 작성하면서도 페이징 처리를 할 수 있었습니다.
-
-<details>
-<summary><b>개선된 코드</b></summary>
-<div markdown="1">
-
-~~~java
-/**
- * 게시물 필터 (Tag Name)
- */
-@Override
-public Page<Post> findAllByTagName(String tagName, Pageable pageable) {
-
-    QueryResults<Post> results = queryFactory
-            .selectFrom(post)
-            .innerJoin(postTag)
-                .on(post.idx.eq(postTag.post.idx))
-            .innerJoin(tag)
-                .on(tag.idx.eq(postTag.tag.idx))
-            .where(tag.name.eq(tagName))
-            .orderBy(post.idx.desc())
-                .limit(pageable.getPageSize())
-                .offset(pageable.getOffset())
-            .fetchResults();
-
-    return new PageImpl<>(results.getResults(), pageable, results.getTotal());
-}
-~~~
-
-</div>
-</details>
-
 </br>
 
-## 6. 그 외 트러블 슈팅
+
+## 6. 그 외 문제 해결
 <details>
 <summary>npm run dev 실행 오류</summary>
 <div markdown="1">
@@ -339,6 +340,16 @@ public Page<Post> findAllByTagName(String tagName, Pageable pageable) {
 
 </div>
 </details>
+  
+<details>
+<summary>vue-cli 호환 문제</summary>
+<div markdown="1">
+  
+  - 초기 프로젝트 진행 중 node LTS 10.16.x 와 vue 구버전을 프로젝트에 사용, vuetify 등 일부 라이브러리의 호환성 문제 발생
+  - vue-cli 업그레이드 및 nvm을 통해 node 12.14.0으로 업데이트 함으로써 해결
+        
+</div>
+</details> 
 
 <details>
 <summary>vue-devtools 크롬익스텐션 인식 오류 문제</summary>
@@ -351,75 +362,37 @@ public Page<Post> findAllByTagName(String tagName, Pageable pageable) {
 </details>
 
 <details>
-<summary>ElementUI input 박스에서 `v-on:keyup.enter="메소드명"`이 정상 작동 안하는 문제</summary>
+<summary>querydslQueryDSl 오류 및 Q클래스 생성 문제</summary>
 <div markdown="1">
   
-  - `v-on:keyup.enter.native=""` 와 같이 .native 추가로 해결
+  - `def querydslDir = "$buildDir/generated/querydsl"`
   
+  - `implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    implementation "com.querydsl:querydsl-apt:${queryDslVersion}"`
+  
+  - 임의 경로가 아닌 명시된 경로로 설정과 버전을 명시하지 않으므로 해결
 </div>
 </details>
 
-<details>
-<summary> Post 목록 출력시에 Member 객체 출력 에러 </summary>
-<div markdown="1">
-  
-  - 에러 메세지(500에러)
-    - No serializer found for class org.hibernate.proxy.pojo.javassist.JavassistLazyInitializer and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationConfig.SerializationFeature.FAIL_ON_EMPTY_BEANS)
-  - 해결
-    - Post 엔티티에 @ManyToOne 연관관계 매핑을 LAZY 옵션에서 기본(EAGER)옵션으로 수정
-  
-</div>
-</details>
-    
-<details>
-<summary> 프로젝트를 git init으로 생성 후 발생하는 npm run dev/build 오류 문제 </summary>
-<div markdown="1">
-  
-  ```jsx
-    $ npm run dev
-    npm ERR! path C:\Users\integer\IdeaProjects\pilot\package.json
-    npm ERR! code ENOENT
-    npm ERR! errno -4058
-    npm ERR! syscall open
-    npm ERR! enoent ENOENT: no such file or directory, open 'C:\Users\integer\IdeaProjects\pilot\package.json'
-    npm ERR! enoent This is related to npm not being able to find a file.
-    npm ERR! enoent
-
-    npm ERR! A complete log of this run can be found in:
-    npm ERR!     C:\Users\integer\AppData\Roaming\npm-cache\_logs\2019-02-25T01_23_19_131Z-debug.log
-  ```
-  
-  - 단순히 npm run dev/build 명령을 입력한 경로가 문제였다.
-   
-</div>
-</details>    
 
 
 <details>
 <summary> JSON: Infinite recursion (StackOverflowError)</summary>
 <div markdown="1">
   
-  - @JsonIgnoreProperties 사용으로 해결
+  - @JsonIgnore 사용으로 해결
     - 참고
         - [http://springquay.blogspot.com/2016/01/new-approach-to-solve-json-recursive.html](http://springquay.blogspot.com/2016/01/new-approach-to-solve-json-recursive.html)
         - [https://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue](https://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue)
+  
+  - 그 외 순환참조를 해결하는 방법에서 불필요한 양방향 관계보다 단방향 관계 설정을 할 수 있다.
+  
+  - 엔티티를 직접적으로 반환하지말고 DTO를 이용해 간접 반환한다.
         
 </div>
 </details>  
     
     
-<details>
-<summary> 컨텐츠수정 모달창에서 태그 셀렉트박스 드랍다운이 뒤쪽에 보이는 문제</summary>
-<div markdown="1">
-  
-   - ElementUI의 Global Config에 옵션 추가하면 해결
-     - main.js 파일에 `Vue.us(ElementUI, { zIndex: 9999 });` 옵션 추가(9999 이하면 안됌)
-   - 참고
-     - [https://element.eleme.io/#/en-US/component/quickstart#global-config](https://element.eleme.io/#/en-US/component/quickstart#global-config)
-        
-</div>
-</details> 
-
 <details>
 <summary> HTTP delete Request시 개발자도구의 XHR(XMLHttpRequest )에서 delete요청이 2번씩 찍히는 이유</summary>
 <div markdown="1">
@@ -436,33 +409,24 @@ public Page<Post> findAllByTagName(String tagName, Pageable pageable) {
         
 </div>
 </details> 
-
-<details>
-<summary> 이미지 파싱 시 og:image 경로가 달라서 제대로 파싱이 안되는 경우</summary>
-<div markdown="1">
-  
-  - UserAgent 설정으로 해결
-        - [https://www.javacodeexamples.com/jsoup-set-user-agent-example/760](https://www.javacodeexamples.com/jsoup-set-user-agent-example/760)
-        - [http://www.useragentstring.com/](http://www.useragentstring.com/)
-        
-</div>
-</details> 
     
 <details>
 <summary>화면단에서 새로고침 시 VEUX 상태 초기화 되는 문제</summary>
 <div markdown="1">
- 
+  
+  - vuex-persistedstate를 이용하여 vuex에 저장되어 있는 값들을 localStorage에 저장하여 해결  
+  - 하지만 props로 전달 받은 데이터는 저장이 안되며, 전역화 시킨 컴포넌트를 해제하여  각각의 view 에 삽입으로 해결
         
 </div>
 </details> 
-    
+  
+  
 <details>
-<summary>JPA 양방향 엔티티 무한재귀 문제</summary>
+<summary>특정 객체 삭제 시 관련된  모두 삭제</summary>
 <div markdown="1">
   
-  - @JsonIgnore 직렬화 방지
-  - Entity 자체 반환보다는 DTO를 이용
-  - 양방향 -> 단방향으로 변경
+  - 양방향 설정관계에서 CASCADE_ALL(REMOVE) 옵션 설정을 상황에 맞게 변경,
+  - 또한, 삭제 전 양방향 관계를 null 값으로 끊어주고 변경하여 해결
         
 </div>
 </details> 
