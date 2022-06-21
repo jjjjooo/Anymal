@@ -1,6 +1,6 @@
 # :pushpin: ANYMAL
 >유기 동물 커뮤니티  
-
+>http://ec2-3-37-84-38.ap-northeast-2.compute.amazonaws.com/home
 
 </br>
 
@@ -427,6 +427,17 @@ public List<Posts> findTags(String tag,int page) {
   
   - 양방향 설정관계에서 CASCADE_ALL(REMOVE) 옵션 설정을 상황에 맞게 변경,
   - 또한, 삭제 전 양방향 관계를 null 값으로 끊어주고 변경하여 해결
+        
+</div>
+</details>
+  
+<details>
+<summary>nginx 사용 시 405 문제</summary>
+<div markdown="1">
+  
+  - git 주소 변경을 망각하고 이전 원격저장소에서 받아놓은 개발 파일로 빌드
+  - 결과적으로 URL이 틀려 생긴 문제
+
         
 </div>
 </details> 
