@@ -21,7 +21,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin("*")
-@RequestMapping("api/chat")
+@RequestMapping("/api/chat")
 public class ChatController{
     private final SimpMessageSendingOperations template;
     private final ChatService chatService;

@@ -16,7 +16,7 @@ import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("api")
+@RequestMapping("/api")
 public class PostsImageController {
 
     private final PostsImageService photoService;

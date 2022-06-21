@@ -30,7 +30,7 @@ import javax.validation.constraints.NotBlank;
 @RequiredArgsConstructor
 @RestController
 @CrossOrigin("*")
-@RequestMapping("api/post")
+@RequestMapping("/api/post")
 public class PostsController {
 
     private final PostsService postsService;
