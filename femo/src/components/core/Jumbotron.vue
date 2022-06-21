@@ -1,8 +1,8 @@
 <template>
   <v-img
-    v-if="namespace === 'Index'"
-    :height="$vuetify.breakpoint.xsOnly ? '100vh' : '70vh'"
+    :height="$vuetify.breakpoint.xsOnly ? '30vh' : '300px'"
     gradient="to top, rgba(255, 255, 255, .75), rgba(255, 255, 255, .75)"
+    :src="`https://placeimg.com/1200/400/animals/sepia`"
   >
     <v-container
       fill-height
@@ -12,17 +12,6 @@
       <v-row align-center>
         <v-slide-x-transition appear>
           <v-col align="center">
-            <h1
-              class="text-uppercase font-weight-bold mb-4"
-              :class="[
-                $vuetify.breakpoint.xsOnly
-                  ? 'display-1'
-                  : 'display-3',
-              ]"
-            >
-              Hi, I'm Michael George
-            </h1>
-
             <div
               class="mb-4"
               :class="[
@@ -31,23 +20,15 @@
                   : 'display-2 font-weight-light',
               ]"
               justify
-            >
-              I am a Software Engineer
-            </div>
-
-            <v-responsive max-width="600" class="mb-5">
-              Vivamus elementum semper nisi. Maecenas
-            </v-responsive>
-
-            <v-btn large class="px-5"> Hire Me </v-btn>
+            ></div>
           </v-col>
         </v-slide-x-transition>
       </v-row>
     </v-container>
   </v-img>
 
-  <v-sheet
-    v-else
+  <!-- <v-sheet
+    v-if="namespace === 'Index'"
     :min-height="
       $vuetify.breakpoint.smAndDown ? '40vh' : '300px'
     "
@@ -73,37 +54,17 @@
         />
       </v-row>
     </v-container>
-  </v-sheet>
+  </v-sheet> -->
 </template>
 
 <script>
 export default {
   computed: {
-    breadcrumbs() {
-      const home = { text: 'Home', to: '/' };
-
-      switch (this.namespace) {
-        case 'About':
-          return [home, { text: 'About Me' }];
-        case 'Contact':
-          return [home, { text: 'Contact Me' }];
-        case 'Work':
-          return [home, { text: 'My Work' }];
-        default:
-          return [];
-      }
-    },
     namespace() {
       return this.$route.name;
     },
     title() {
       switch (this.namespace) {
-        case 'About':
-          return 'About Me';
-        case 'Contact':
-          return 'Contact Me';
-        case 'Work':
-          return 'My Work';
         default:
           return '';
       }

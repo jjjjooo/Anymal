@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface PostsTagRepository extends JpaRepository<PostsTag, Long> {
-
+    @EntityGraph(attributePaths = {"posts", "tag"})
     List<PostsTag> findAllByTagIdIn(List<Long> tagIds);
     List<PostsTag> findAllByPostsId(Long postsId);
 }

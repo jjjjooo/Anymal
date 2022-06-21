@@ -132,7 +132,7 @@
           <v-carousel-item
             v-for="(item, i) in postDetail.fileId"
             :key="i"
-            :src="`http://localhost:9000/image/${item.fileId}`"
+            :src="`http://ec2-3-37-84-38.ap-northeast-2.compute.amazonaws.com/image/${item.fileId}`"
             reverse-transition="fade-transition"
             transition="fade-transition"
           ></v-carousel-item>

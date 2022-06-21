@@ -6,10 +6,10 @@ module.exports = defineConfig({
       overlay: false,
     },
     proxy: {
-      '/api': {
+      '/': {
         target:
-          'http://ec2-3-37-84-38.ap-northeast-2.compute.amazonaws.com:8080/',
-        // 'http://192.168.0.127:8080/',
+          'http://ec2-3-37-84-38.ap-northeast-2.compute.amazonaws.com:8080',
+        changeOrigin: true,
       },
     },
   },

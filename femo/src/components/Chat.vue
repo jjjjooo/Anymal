@@ -3,7 +3,7 @@
     <v-container>
       <div class="float-left">
         <v-img
-          :src="`http://localhost:9000/thumbnail/${chatRoomDetail.image}`"
+          :src="`http://ec2-3-37-84-38.ap-northeast-2.compute.amazonaws.com/thumbnail/${chatRoomDetail.image}`"
           contain
           height="150"
           style="display: inline-block"

@@ -4,16 +4,11 @@ package com.example.demo.domain.post.posts;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-
-import javax.persistence.Entity;
 import java.util.List;
-import java.util.Optional;
+
 
 import static com.example.demo.domain.post.posts.QPosts.posts;
 

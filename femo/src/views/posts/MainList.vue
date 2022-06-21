@@ -35,7 +35,7 @@
               class="auto"
               ><router-link :to="`/post-detail/${list.id}`">
                 <v-img
-                  :src="`http://localhost:9000/thumbnail/${list.thumbnailId}`"
+                  :src="`http://ec2-3-37-84-38.ap-northeast-2.compute.amazonaws.com/thumbnail/${list.thumbnailId}`"
                   height="200px"
                   width="auto"
                   class="white--text align-end"
@@ -128,7 +128,6 @@ export default {
         let form = {
           page: 1,
           dType: 'pr',
-          area: 'temp',
         };
         this.$store.dispatch(
           'REQUEST_GET_SEARCH_POST',
@@ -139,7 +138,6 @@ export default {
         let form = {
           page: 1,
           dType: 'ms',
-          area: 'temp',
         };
         this.$store.dispatch(
           'REQUEST_GET_SEARCH_POST',
@@ -149,7 +147,6 @@ export default {
       if (category === '3') {
         let form = {
           page: 1,
-          dType: 'temp',
           area: this.userarea,
         };
         this.$store.dispatch(
